@@ -1,0 +1,60 @@
+{
+  "testRunner": "jest",
+  "runnerConfig": "e2e/config.json",
+  "skipLegacyWorkersInjection": true,
+  "devices": {
+    "seb": {
+      "type": "android.attached",
+      "device": {
+        "adbName": "9HQ0219603014829"
+      }
+    },
+    "ios": {
+      "type": "ios.simulator",
+      "device": {
+        "type": "iPhone 13",
+        "os": "iOS 15.0"
+      }
+    }
+  },
+  "apps": {
+    "android.debug": {
+      "type": "android.apk",
+      "binaryPath": "android/app/build/outputs/apk/debug/app-debug.apk",
+      "build": "cd android && gradlew assembleDebug assembleDebugAndroidTest -DtestBuildType=debug && cd .."
+    },
+    "android.release": {
+      "type": "android.apk",
+      "binaryPath": "android/app/build/outputs/apk/release/app-release.apk",
+      "build": "cd android && gradlew assembleBetaRelease assembleBetaReleaseAndroidTest -DtestBuildType=release && cd .."
+    },
+    "ios.debug": {
+      "type": "ios.app",
+      "binaryPath": "ios/Build/Products/Debug-iphonesimulator/PhotoStopper.app",
+      "build": "xcodebuild -workspace ios/PhotoStopper.xcworkspace -UseNewBuildSystem=NO -scheme PhotoStopper -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build"
+    },
+    "ios.release": {
+      "type": "ios.app",
+      "binaryPath": "ios/build/Build/Products/Release-iphonesimulator/PhotoStopper.app",
+      "build": "export RCT_NO_LAUNCH_PACKAGER=true && xcodebuild -workspace ios/PhotoStopper.xcworkspace -UseNewBuildSystem=NO -scheme PhotoStopper -configuration Release -sdk iphonesimulator -derivedDataPath ios/build -quiet"
+    }
+  },
+  "configurations": {
+    "android.debug": {
+      "device": "seb",
+      "app": "android.debug"
+    },
+    "android.release": {
+      "device": "seb",
+      "app": "android.release"
+    },
+    "ios.debug": {
+      "device": "ios",
+      "app": "ios.debug"
+    },
+    "ios.release": {
+      "device": "ios",
+      "app": "ios.release"
+    }
+  }
+}
