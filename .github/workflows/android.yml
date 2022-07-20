@@ -34,9 +34,6 @@ jobs:
           # https://github.com/actions/toolkit/issues/641#issuecomment-728963957
           ACTIONS_ALLOW_UNSECURE_COMMANDS: "true"
 
-      - name: Run Unit Test(s)
-        run: yarn test
-
       - name: Run Detox Build
         run: yarn e2e:build android.emu.release
 
