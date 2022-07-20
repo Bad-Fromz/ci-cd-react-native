@@ -34,6 +34,9 @@ jobs:
           # https://github.com/actions/toolkit/issues/641#issuecomment-728963957
           ACTIONS_ALLOW_UNSECURE_COMMANDS: "true"
 
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
       - name: Run Detox Build
         run: yarn e2e:build android.emu.release
 
