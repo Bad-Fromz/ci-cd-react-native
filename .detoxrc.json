@@ -61,7 +61,6 @@
     "android.emu.debug": {
       "type": "android.emulator",
       "binaryPath": "android/app/build/outputs/apk/debug/app-debug.apk",
-      "utilBinaryPaths": ["./cache/test-butler-app.apk"],
       "build": "cd android && ./gradlew assembleDebug assembleAndroidTest -DtestBuildType=debug && cd ..",
       "device": {
         "avdName": "Pixel_API_29_AOSP"
@@ -70,7 +69,6 @@
     "android.emu.release": {
       "type": "android.emulator",
       "binaryPath": "android/app/build/outputs/apk/release/app-release.apk",
-      "utilBinaryPaths": ["./cache/test-butler-app.apk"],
       "build": "cd android && ./gradlew assembleRelease assembleReleaseAndroidTest -DtestBuildType=release && cd ..",
       "device": {
         "avdName": "Pixel_API_29_AOSP"
