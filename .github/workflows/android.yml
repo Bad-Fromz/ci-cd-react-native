@@ -1,54 +1,46 @@
-name: Android
+name: E2E (Android)
 
-on: [push]
+on:
+  pull_request:
+    branches: [master]
 
 jobs:
   build:
-    runs-on: macos-latest
-    timeout-minutes: 15
+    name: E2E (Android)
+    runs-on: macOS-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v1
-        with:
-          fetch-depth: 1
+      - uses: actions/checkout@v1
 
-      - name: Node
+      - name: Install Node
         uses: actions/setup-node@v1
+        with:
+          node-version: "12"
 
-      - name: Use specific Java version for sdkmanager to work
+      - name: Install Yarn Dependencies
+        run: yarn install
+
+      - name: Install Java JDK
         uses: joschi/setup-jdk@v1
         with:
           java-version: "openjdk8"
           architecture: "x64"
+        env:
+          # https://github.com/actions/toolkit/issues/641#issuecomment-728963957
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: "true"
 
-      - name: Download Android Emulator Image
-        run: |
-          echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install "system-images;android-29;google_apis;x86"
-          echo "no" | $ANDROID_HOME/tools/bin/avdmanager create avd --force --name emu --device "Nexus 5X" -k 'system-images;android-29;google_apis;x86'
-          $ANDROID_HOME/emulator/emulator -list-avds
-      - name: Install node_modules
-        run: |
-          yarn install --frozen-lockfile
+      - name: Run Unit Test(s)
+        run: yarn test
 
-      - name: Build for detox
-        run: |
-          detox build -c android.emu.debug
-      - name: Android Emulator
-        timeout-minutes: 10
-        continue-on-error: true
-        run: |
-          echo "Starting emulator"
-          nohup $ANDROID_HOME/emulator/emulator -avd emu -no-audio -no-snapshot -no-window &
-          $ANDROID_HOME/platform-tools/adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed | tr -d '\r') ]]; do sleep 1; done; input keyevent 82'
-          $ANDROID_HOME/platform-tools/adb devices
-          echo "Emulator started"
-      - name: Android Detox
-        run: yarn start & yarn detox test -c android.emu.debug
+      - name: Run Detox Build
+        run: yarn e2e:build android.emu.release
 
-      - name: Store Detox artifacts on test failure
-        uses: actions/upload-artifact@v3
-        if: failure()
+      - name: Run Detox Test(s)
+        uses: reactivecircus/android-emulator-runner@v2
         with:
-          name: detox-artifacts
-          path: artifacts # Default path for Detox artifacts
+          api-level: 29
+          target: default
+          arch: x86_64
+          profile: pixel
+          avd-name: Pixel_API_29_AOSP
+          script: bash ${{ github.workspace }}/scripts/run-e2e-android-release.sh
