@@ -6,7 +6,7 @@ const App = () => {
   return (
     <View style={{ padding: 26, backgroundColor: "white", flex: 1 }}>
       <Text>App</Text>
-      <CTA testID={"welcome"} label={"WELCOME"} onPress={() => console.log("Hello world")} />
+      <CTA label={"WELCOME"} onPress={() => console.log("Hello world")} />
     </View>
   );
 };
