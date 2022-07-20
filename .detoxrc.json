@@ -30,13 +30,13 @@
     },
     "ios.debug": {
       "type": "ios.app",
-      "binaryPath": "ios/Build/Products/Debug-iphonesimulator/PhotoStopper.app",
-      "build": "xcodebuild -workspace ios/PhotoStopper.xcworkspace -UseNewBuildSystem=NO -scheme PhotoStopper -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build"
+      "binaryPath": "ios/Build/Products/Debug-iphonesimulator/cicdreactnative.app",
+      "build": "xcodebuild -workspace ios/cicdreactnative.xcworkspace -UseNewBuildSystem=NO -scheme example -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build"
     },
     "ios.release": {
       "type": "ios.app",
-      "binaryPath": "ios/build/Build/Products/Release-iphonesimulator/PhotoStopper.app",
-      "build": "export RCT_NO_LAUNCH_PACKAGER=true && xcodebuild -workspace ios/PhotoStopper.xcworkspace -UseNewBuildSystem=NO -scheme PhotoStopper -configuration Release -sdk iphonesimulator -derivedDataPath ios/build -quiet"
+      "binaryPath": "ios/Build/Products/Release-iphonesimulator/cicdreactnative.app",
+      "build": "export RCT_NO_LAUNCH_PACKAGER=true && xcodebuild -workspace ios/cicdreactnative.xcworkspace -UseNewBuildSystem=NO -scheme cicdreactnative -configuration Release -sdk iphonesimulator -derivedDataPath ios/build -quiet"
     }
   },
   "configurations": {

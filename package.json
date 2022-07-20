@@ -8,8 +8,8 @@
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint .",
-    "e2e:build": "detox build -c android.emu.release",
-    "e2e:test": "detox test -c android.emu.release"
+    "e2e:build": "detox build -c",
+    "e2e:test": "detox test -c"
   },
   "dependencies": {
     "react": "17.0.2",
