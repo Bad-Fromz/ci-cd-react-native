@@ -1,8 +1,13 @@
 name: E2E (Android)
 
 on:
+  push:
+    branches:
+      - develop
   pull_request:
-    branches: [master]
+    branches:
+      - develop
+      - main
 
 jobs:
   build:
