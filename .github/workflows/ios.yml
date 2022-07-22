@@ -20,7 +20,8 @@ jobs:
         with:
           model: "iPhone 13"
           os: "iOS"
-          os_version: "15.0"
+          os_version: "15.2"
+          udid: "802C4FCB-75F8-4C9A-B085-D4C33D0228EE"
 
       - name: Install Node
         uses: actions/setup-node@v1
