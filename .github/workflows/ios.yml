@@ -16,6 +16,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v1
+      - uses: futureware-tech/simulator-action@v1
+        with:
+          model: "iPhone 13"
+          os: "iOS"
+          os_version: "15.0"
 
       - name: Install Node
         uses: actions/setup-node@v1
