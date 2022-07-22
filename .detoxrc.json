@@ -15,6 +15,13 @@
         "type": "iPhone 13",
         "os": "iOS 15.0"
       }
+    },
+    "ios_git": {
+      "type": "ios.simulator",
+      "device": {
+        "type": "iPhone 13",
+        "os": "iOS 15.2"
+      }
     }
   },
   "apps": {
@@ -55,6 +62,15 @@
     },
     "ios.release": {
       "device": "ios",
+      "app": "ios.release"
+    },
+
+    "ios.emu.debug": {
+      "device": "ios_git",
+      "app": "ios.debug"
+    },
+    "ios.emu.release": {
+      "device": "ios_git",
       "app": "ios.release"
     },
 
